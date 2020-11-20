@@ -39,8 +39,9 @@ if ( ! function_exists( 'bensemangat_woocommerce_wrapper_start' ) ) {
 	 * Display the theme specific start of the page wrapper.
 	 */
 	function bensemangat_woocommerce_wrapper_start() {
+		$container = get_theme_mod( 'bensemangat_container_type' );
 		echo '<div class="wrapper" id="woocommerce-wrapper">';
-		echo '<div class="container-fluid" id="content" tabindex="-1">';
+		echo '<div class="'.$container.'" id="content" tabindex="-1">';
 		echo '<div class="row">';
 		get_template_part( 'global-templates/left-sidebar-check' );
 		echo '<main class="site-main" id="main">';

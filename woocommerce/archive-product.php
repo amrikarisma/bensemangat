@@ -19,20 +19,10 @@ defined( 'ABSPATH' ) || exit;
 $container = get_theme_mod( 'bensemangat_container_type' );
 
 get_header( 'shop' );
-
-/**
- * Hook: woocommerce_before_main_content.
- *
- * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
- * @hooked WC_Structured_Data::generate_website_data() - 30
- */
-do_action( 'woocommerce_before_main_content' );
-
+	
 ?>
-<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
-
 	<header class="woocommerce-products-header">
+		<div class="<?php echo esc_attr( $container ); ?>">
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
 		<?php endif; ?>
@@ -46,7 +36,24 @@ do_action( 'woocommerce_before_main_content' );
 		 */
 		do_action( 'woocommerce_archive_description' );
 		?>
+		</div>
 	</header>
+<?php
+
+/**
+ * Hook: woocommerce_before_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+ * @hooked woocommerce_breadcrumb - 20
+ * @hooked WC_Structured_Data::generate_website_data() - 30
+ */
+do_action( 'woocommerce_before_main_content' );
+
+?>
+
+<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+
+
 	<?php
 	if ( woocommerce_product_loop() ) {
 
