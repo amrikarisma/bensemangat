@@ -16,6 +16,9 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 <footer class="site-footer" id="colophon">
 <div class="text-center my-4">
 <?php 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active('woo-xendit-virtual-accounts/woocommerce-xendit-pg.php') ) {
+
 	$lsitBank = [
 		'bca',
 		'bni',
@@ -39,7 +42,8 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 	}
 	echo '</div>';
 	echo '</div>';
-
+	// the plugin is active
+}
 ?>
 </div>
 <?php get_template_part( 'sidebar-templates/sidebar', 'footerfull' ); ?>
