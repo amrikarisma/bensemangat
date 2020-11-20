@@ -182,6 +182,47 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 	}
 } // End of if function_exists( 'bensemangat_site_customize_register' ).
 add_action( 'customize_register', 'bensemangat_site_customize_register' );
+
+if( ! function_exists( 'bensemangat_general_customize_register' ) ) {
+	function bensemangat_general_customize_register( $wp_customize ) {
+
+		$wp_customize->add_section(
+			'bensemangat_general_options',
+			array(
+				'title'			=> __('General Settings', 'bensemangat'),
+				'capability'	=> 'edit_theme_options',
+				'description'	=> __('All general setting options for this theme.', 'bensemangat'),
+				'priority'		=> apply_filters( 'bensemangat_general_options_priority', 160 ),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'bensemangat_preloader',
+			array(
+				'default'			=>	'off',
+				'type'				=>	'theme_options',
+				'sanitize_callback'	=>	'sanitize_text_field',
+				'capability'		=>	'edit_theme_options',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_preloader',
+				array(
+					'label'				=> __('Preloader', 'bensemangat'),
+					'description'		=> __('Enable or Disable Preloader before website fully loaded.'),
+					'section'			=> 'bensemangat_general_options',
+					'settings'			=> 'bensemangat_preloader',
+					'type'				=> 'text',
+					'priority'			=> apply_filters( 'bensemangat_preloader', 20 ),
+				)
+			)
+		);
+	}
+}
+add_action( 'customize_register', 'bensemangat_general_customize_register');
+
 // End Custom
 
 /**
