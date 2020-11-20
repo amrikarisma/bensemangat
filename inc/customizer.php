@@ -182,6 +182,65 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 	}
 } // End of if function_exists( 'bensemangat_site_customize_register' ).
 add_action( 'customize_register', 'bensemangat_site_customize_register' );
+
+if( ! function_exists( 'bensemangat_general_customize_register' ) ) {
+	function bensemangat_general_customize_register( $wp_customize ) {
+
+		//radio box sanitization function
+		function theme_slug_sanitize_radio( $input, $setting ){
+		
+			//input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
+			$input = sanitize_key($input);
+	
+			//get the list of possible radio box options 
+			$choices = $setting->manager->get_control( $setting->id )->choices;
+								
+			//return input if valid or return default option
+			return ( array_key_exists( $input, $choices ) ? $input : $setting->default );                
+				
+		}
+
+		$wp_customize->add_section(
+			'bensemangat_general_options',
+			array(
+				'title'			=> __('General Settings', 'bensemangat'),
+				'capability'	=> 'edit_theme_options',
+				'description'	=> __('All general setting options for this theme.', 'bensemangat'),
+				'priority'		=> apply_filters( 'bensemangat_general_options_priority', 160 ),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'bensemangat_preloader',
+			array(
+				'default'			=>	'off',
+				'type'				=>	'theme_mod',
+				'sanitize_callback'	=>	'theme_slug_sanitize_radio',
+				'capability'		=>	'edit_theme_options',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_preloader',
+				array(
+					'label'				=> __('Preloader', 'bensemangat'),
+					'description'		=> __('Enable or Disable Preloader before website fully loaded.'),
+					'section'			=> 'bensemangat_general_options',
+					'settings'			=> 'bensemangat_preloader',
+					'priority'			=> apply_filters( 'bensemangat_preloader', 20 ),
+					'type' => 'radio',
+					'choices' => array(
+						'on' => esc_html__('Enable Preloader','bensemangat'),
+						'off' => esc_html__('Disable Preloader','bensemangat'),
+					)
+				)
+			)
+		);
+	}
+}
+add_action( 'customize_register', 'bensemangat_general_customize_register');
+
 // End Custom
 
 /**

@@ -18,11 +18,19 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?> <?php bensemangat_body_attributes(); ?>>
+<?php if( get_theme_mod( 'bensemangat_preloader' ) === 'on' )  : ?>
+<div class="preloader">
+  <div class="loading">
+    <img class="img-fluid" src="https://www.jotconstructions.ca/wp-content/themes/jot-construction/images/loader.gif" width="400">
+    <!-- <div class="text-center">Harap Tunggu</div> -->
+  </div>
+</div>
+<?php endif; ?>
+
 <?php do_action( 'wp_body_open' ); ?>
 <div class="site" id="page">
 	<div class="topbar-wrapp color-scheme-light">
@@ -36,14 +44,14 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 							<?php endif; ?>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 d-none d-sm-block">
 						<div class="topbar-right text-right">
 							<?php
 							wp_nav_menu(
 								array(
 									'theme_location'  => 'topbar',
 									'container_class' => '',
-									'container_id'    => 'navbarNavDropdown',
+									'container_id'    => 'navbar-nav',
 									'menu_class'      => '',
 									'fallback_cb'     => '',
 									'menu_id'         => 'topbar-menu',
@@ -83,7 +91,7 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 					<?php
 					
 					} else {
-						echo '<div class="d-lg-none">';
+						echo '<div class="logo-center d-lg-none">';
 						the_custom_logo();
 						echo '</div>';
 					}
@@ -107,7 +115,7 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 								'container_id'    => '',
 								'menu_class'      => 'navbar-nav',
 								'fallback_cb'     => '',
-								'menu_id'         => 'main-menu',
+								'menu_id'         => 'primary-menu',
 								'depth'           => 2,
 								'walker'          => new Bensemangat_WP_Bootstrap_Navwalker(),
 							)
