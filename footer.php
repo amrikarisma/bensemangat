@@ -14,7 +14,36 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 ?>
 
 <footer class="site-footer" id="colophon">
+<div class="text-center my-4">
+<?php 
+	$lsitBank = [
+		'bca',
+		'bni',
+		'mandiri',
+		'permata',
+		'ovo',
+		'dana',
+		'alfamart',
+		'indomaret',
+		'bri',
+		'linkaja',
+		'cc',
+	];
+	$domain = site_url();
+	echo '<div class="container">';
+	echo '<div class="row">';
+	foreach ($lsitBank as $key => $value ) {
+		echo '<div class="col">';
+		echo '<img src="'.$domain.'/wp-content/plugins/woo-xendit-virtual-accounts/assets/images/'.$value.'.png" style="max-width:60px;margin-bottom:20px;">';
+		echo '</div>';
+	}
+	echo '</div>';
+	echo '</div>';
+
+?>
+</div>
 <?php get_template_part( 'sidebar-templates/sidebar', 'footerfull' ); ?>
+<?php get_template_part( 'sidebar-templates/sidebar', 'hiddenwidget' ); ?>
 
 	<div class="wrapper" id="wrapper-footer">
 
@@ -38,7 +67,6 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 </footer><!-- #colophon -->
 
 </div><!-- #page we need this extra closing tag here -->
-<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <?php wp_footer(); ?>
 </body>
 

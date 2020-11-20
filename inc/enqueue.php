@@ -31,3 +31,23 @@ if ( ! function_exists( 'bensemangat_scripts' ) ) {
 } // End of if function_exists( 'bensemangat_scripts' ).
 
 add_action( 'wp_enqueue_scripts', 'bensemangat_scripts' );
+
+if ( ! function_exists( 'bensemangat_global_scripts' ) ) {
+	/**
+	 * Load theme's JavaScript and CSS sources.
+	 */
+	function bensemangat_global_scripts() {
+		// Get the theme data.
+		wp_enqueue_style( 'swiper-styles', '//unpkg.com/swiper/swiper-bundle.min.css', array(), '6.3.5' );
+
+		wp_enqueue_style( 'bensemangat-global-styles', get_template_directory_uri() . '/css/global.css', array(), '1.0.'.rand(10000,99999) );
+
+		wp_enqueue_script( 'jquery' );
+
+		wp_enqueue_script( 'swiper-scripts', '//unpkg.com/swiper/swiper-bundle.js', array(), '6.3.5.', true );
+		wp_enqueue_script( 'bensemangat-global-scripts', get_template_directory_uri() . '/js/global.js', array(), '1.0.'.rand(10000,99999), true );
+
+	}
+} // End of if function_exists( 'bensemangat_global_scripts' ).
+
+add_action( 'wp_enqueue_scripts', 'bensemangat_global_scripts', 1 );
