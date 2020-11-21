@@ -25,6 +25,13 @@ get_header( 'shop' );
 		<div class="<?php echo esc_attr( $container ); ?>">
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+			<div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+				<?php 
+					if(function_exists('bcn_display')){
+						bcn_display();
+					}
+				?>
+			</div>
 		<?php endif; ?>
 
 		<?php

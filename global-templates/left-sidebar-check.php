@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 $sidebar_pos = get_theme_mod( 'bensemangat_sidebar_position' );
 
-if ( 'left' === $sidebar_pos || 'both' === $sidebar_pos ) {
+if ( 'left' === $sidebar_pos || 'both' === $sidebar_pos || function_exists( 'is_shop' ) && is_shop()) {
 	get_template_part( 'sidebar-templates/sidebar', 'left' );
 }
 ?>

@@ -17,10 +17,13 @@ $sidebar_pos = get_theme_mod( 'bensemangat_sidebar_position' );
 ?>
 
 <?php if ( 'both' === $sidebar_pos ) : ?>
-	<div class="col-md-3 widget-area" id="left-sidebar" role="complementary">
+	<div class="col-md-3">
 <?php else : ?>
-	<div class="col-md-4 widget-area" id="left-sidebar" role="complementary">
+	<div class="col-md-4">
 <?php endif; ?>
-<?php dynamic_sidebar( 'left-sidebar' ); ?>
+
+	<div class="content-sidebar woocommerce-sidebar widget-area" id="left-sidebar" role="complementary">
+		<?php dynamic_sidebar( 'left-sidebar' ); ?>
+	</div>
 
 </div><!-- #left-sidebar -->

@@ -167,5 +167,10 @@ if ( ! is_admin() && ! function_exists( 'wc_review_ratings_enabled' ) ) {
 		return wc_reviews_enabled() && 'yes' === get_option( 'woocommerce_enable_review_rating' );
 	}
 
-
+	function woocommerce_remove_breadcrumb(){
+		remove_action( 
+			'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+		}
+	add_action('woocommerce_before_main_content', 'woocommerce_remove_breadcrumb');
+	
 }
