@@ -49,7 +49,7 @@ if ( is_plugin_active('woo-xendit-virtual-accounts/woocommerce-xendit-pg.php') )
 <?php get_template_part( 'sidebar-templates/sidebar', 'footerfull' ); ?>
 <?php get_template_part( 'sidebar-templates/sidebar', 'hiddenwidget' ); ?>
 
-	<div class="wrapper" id="wrapper-footer">
+	<div class="wrapper copyright-wrap" id="wrapper-footer">
 
 		<div class="<?php echo esc_attr( $container ); ?>">
 				
@@ -57,7 +57,7 @@ if ( is_plugin_active('woo-xendit-virtual-accounts/woocommerce-xendit-pg.php') )
 
 				<div class="col-md-12">
 					<div class="copyright">
-						Copyright 2020 by DCC. All Rights Reserved.
+						Copyright 2020 by DCC. &copy All Rights Reserved.
 					</div>
 
 				</div><!--col end -->
@@ -68,6 +68,7 @@ if ( is_plugin_active('woo-xendit-virtual-accounts/woocommerce-xendit-pg.php') )
 		</div><!-- container end -->
 
 	</div><!-- wrapper end -->
+
 </footer><!-- #colophon -->
 
 </div><!-- #page we need this extra closing tag here -->
