@@ -18,9 +18,23 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+$container = get_theme_mod( 'bensemangat_container_type' );
 
 get_header( 'shop' ); ?>
-
+	<header class="woocommerce-products-header">
+		<div class="<?php echo esc_attr( $container ); ?>">
+		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+			<div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+				<?php 
+					if(function_exists('bcn_display')){
+						bcn_display();
+					}
+				?>
+			</div>
+		<?php endif; ?>
+		</div>
+	</header>
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.

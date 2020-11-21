@@ -37,14 +37,16 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 		<div class="container">
 			<div class="topbar-content">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<div class="topbar-left">
 							<?php if( get_theme_mod( 'bensemangat_site_info_phone') != "" ): ?>
-							<span>OUR PHONE NUMBER:</span> <?php echo get_theme_mod( 'bensemangat_site_info_phone'); ?>
+							<span class="phone"><?php echo get_theme_mod( 'bensemangat_site_info_phone'); ?></span>
+							<span>Regione Venetta, 21/100, Milano, Italy</span>
+							<span>Monday-Sunday 9:00 - 23:00</span>
 							<?php endif; ?>
 						</div>
 					</div>
-					<div class="col-md-6 d-none d-sm-block">
+					<div class="col-md-4 d-none d-sm-block">
 						<div class="topbar-right text-right">
 							<?php
 							wp_nav_menu(
@@ -72,7 +74,7 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 
 		<a class="skip-link sr-only sr-only-focusable" href="#content"><?php esc_html_e( 'Skip to content', 'bensemangat' ); ?></a>
 
-		<nav id="main-nav" class="navbar navbar-expand-lg navbar-light" aria-labelledby="main-nav-label">
+		<nav id="main-nav" class="navbar navbar-expand-lg navbar-dark" aria-labelledby="main-nav-label">
 
 			<!--  Show this only on mobile to medium screens  -->
 					<!-- Your site title as branding in the menu -->

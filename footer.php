@@ -16,6 +16,9 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 <footer class="site-footer" id="colophon">
 <div class="text-center my-4">
 <?php 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active('woo-xendit-virtual-accounts/woocommerce-xendit-pg.php') ) {
+
 	$lsitBank = [
 		'bca',
 		'bni',
@@ -39,13 +42,14 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 	}
 	echo '</div>';
 	echo '</div>';
-
+	// the plugin is active
+}
 ?>
 </div>
 <?php get_template_part( 'sidebar-templates/sidebar', 'footerfull' ); ?>
 <?php get_template_part( 'sidebar-templates/sidebar', 'hiddenwidget' ); ?>
 
-	<div class="wrapper" id="wrapper-footer">
+	<div class="wrapper copyright-wrap" id="wrapper-footer">
 
 		<div class="<?php echo esc_attr( $container ); ?>">
 				
@@ -53,7 +57,7 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 
 				<div class="col-md-12">
 					<div class="copyright">
-						Copyright 2020 by DCC. All Rights Reserved.
+						Copyright 2020 by DCC. &copy All Rights Reserved.
 					</div>
 
 				</div><!--col end -->
@@ -64,6 +68,7 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 		</div><!-- container end -->
 
 	</div><!-- wrapper end -->
+
 </footer><!-- #colophon -->
 
 </div><!-- #page we need this extra closing tag here -->
