@@ -26,7 +26,7 @@ function my_acf_json_load_point( $paths ) {
     
     
     // append path
-    $paths[] = get_stylesheet_directory() . '/json/acf';
+    $paths[] = get_template_directory() . '/json/acf';
     
     
     // return
