@@ -162,6 +162,24 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 				'capability'        => 'edit_theme_options',
 			)
 		);
+		$wp_customize->add_setting(
+			'bensemangat_site_info_address',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_site_info_text',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
 
 		$wp_customize->add_control(
 			new WP_Customize_Control(
@@ -176,6 +194,38 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 					'settings'          => 'bensemangat_site_info_phone',
 					'type'              => 'text',
 					'priority'          => apply_filters( 'bensemangat_site_info_phone_priority', 20 ),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_site_info_address',
+				array(
+					'label'             => __( 'Your Address', 'bensemangat' ),
+					'description'       => __(
+						'Please enter your address to display in the top bar of the navigation menu.'
+					),
+					'section'           => 'bensemangat_site_info_options',
+					'settings'          => 'bensemangat_site_info_address',
+					'type'              => 'textarea',
+					'priority'          => apply_filters( 'bensemangat_site_info_address_priority', 20 ),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_site_info_text',
+				array(
+					'label'             => __( 'Text Info', 'bensemangat' ),
+					'description'       => __(
+						'Please enter text whatever to display in the top bar of the navigation menu.'
+					),
+					'section'           => 'bensemangat_site_info_options',
+					'settings'          => 'bensemangat_site_info_text',
+					'type'              => 'textarea',
+					'priority'          => apply_filters( 'bensemangat_site_info_text_priority', 20 ),
 				)
 			)
 		);
