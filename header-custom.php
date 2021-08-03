@@ -41,8 +41,8 @@ $container = get_theme_mod( 'bensemangat_container_type' );
 						<div class="topbar-left">
 							<?php if( get_theme_mod( 'bensemangat_site_info_phone') != "" ): ?>
 							<span class="phone"><?php echo get_theme_mod( 'bensemangat_site_info_phone'); ?></span>
-							<span>Regione Venetta, 21/100, Milano, Italy</span>
-							<span>Monday-Sunday 9:00 - 23:00</span>
+							<span><?php echo get_theme_mod( 'bensemangat_site_info_address'); ?></span>
+							<span><?php echo get_theme_mod( 'bensemangat_site_info_text'); ?></span>
 							<?php endif; ?>
 						</div>
 					</div>
