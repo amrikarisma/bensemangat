@@ -1,4 +1,6 @@
 // Some basic padding for all wrappers
+@use "sass:math";
+
 .wrapper {
 	padding: $grid-gutter-width 0;
 }
@@ -161,7 +163,7 @@ a.skip-link {
 
 	@for $i from 2 through 9 {
 		.gallery-columns-#{$i} & {
-			max-width: floor( percentage( 1 / $i ) * 100 ) / 100;
+			max-width: floor( percentage( math.div(1, $i) ) * 100 ) * 0.01;
 		}
 	}
 }
