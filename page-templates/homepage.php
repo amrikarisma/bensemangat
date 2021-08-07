@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Homepage Template
  *
@@ -9,12 +10,12 @@
  */
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-get_header();
+get_header('home');
 
-	get_template_part( 'component-templates/comp', 'slider' );
-	get_template_part( 'component-templates/comp', 'featured' );
-	get_template_part( 'component-templates/comp', 'product' );
+get_template_part('component-templates/comp', 'slider');
+get_template_part('component-templates/comp', 'featured');
+get_template_part('component-templates/comp', 'product');
 
 get_footer();
