@@ -12,7 +12,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-get_header();
+get_header('home');
 
 get_template_part('component-templates/comp', 'slider');
 get_template_part('component-templates/comp', 'featured');
