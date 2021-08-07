@@ -1,4 +1,4 @@
-var swiper = new Swiper('.swiper-container', {
+var swiper = new Swiper('.home-slider', {
   cssMode: true,
   // height:680,
   // autoHeight:true,
