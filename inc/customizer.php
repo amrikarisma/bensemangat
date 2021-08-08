@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BenSemangat Theme Customizer
  *
@@ -6,43 +7,45 @@
  */
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-if ( ! function_exists( 'bensemangat_customize_register' ) ) {
+if (!function_exists('bensemangat_customize_register')) {
 	/**
 	 * Register basic customizer support.
 	 *
 	 * @param object $wp_customize Customizer reference.
 	 */
-	function bensemangat_customize_register( $wp_customize ) {
-		$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-		$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-		$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+	function bensemangat_customize_register($wp_customize)
+	{
+		$wp_customize->get_setting('blogname')->transport         = 'postMessage';
+		$wp_customize->get_setting('blogdescription')->transport  = 'postMessage';
+		$wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
 	}
 }
-add_action( 'customize_register', 'bensemangat_customize_register' );
+add_action('customize_register', 'bensemangat_customize_register');
 
-if ( ! function_exists( 'bensemangat_theme_customize_register' ) ) {
+if (!function_exists('bensemangat_theme_customize_register')) {
 	/**
 	 * Register individual settings through customizer's API.
 	 *
 	 * @param WP_Customize_Manager $wp_customize Customizer reference.
 	 */
-	function bensemangat_theme_customize_register( $wp_customize ) {
+	function bensemangat_theme_customize_register($wp_customize)
+	{
 
 		// Theme layout settings.
 		$wp_customize->add_section(
 			'bensemangat_theme_layout_options',
 			array(
-				'title'       => __( 'Theme Layout Settings', 'bensemangat' ),
+				'title'       => __('Theme Layout Settings', 'bensemangat'),
 				'capability'  => 'edit_theme_options',
-				'description' => __( 'Container width and sidebar defaults', 'bensemangat' ),
-				'priority'    => apply_filters( 'bensemangat_theme_layout_options_priority', 160 ),
+				'description' => __('Container width and sidebar defaults', 'bensemangat'),
+				'priority'    => apply_filters('bensemangat_theme_layout_options_priority', 160),
 			)
 		);
 
@@ -53,17 +56,17 @@ if ( ! function_exists( 'bensemangat_theme_customize_register' ) ) {
 		 * @param WP_Customize_Setting $setting Setting instance.
 		 * @return string Sanitized slug if it is a valid choice; otherwise, the setting default.
 		 */
-		function bensemangat_theme_slug_sanitize_select( $input, $setting ) {
+		function bensemangat_theme_slug_sanitize_select($input, $setting)
+		{
 
 			// Ensure input is a slug (lowercase alphanumeric characters, dashes and underscores are allowed only).
-			$input = sanitize_key( $input );
+			$input = sanitize_key($input);
 
 			// Get the list of possible select options.
-			$choices = $setting->manager->get_control( $setting->id )->choices;
+			$choices = $setting->manager->get_control($setting->id)->choices;
 
 			// If the input is a valid key, return it; otherwise, return the default.
-			return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-
+			return (array_key_exists($input, $choices) ? $input : $setting->default);
 		}
 
 		$wp_customize->add_setting(
@@ -81,16 +84,16 @@ if ( ! function_exists( 'bensemangat_theme_customize_register' ) ) {
 				$wp_customize,
 				'bensemangat_container_type',
 				array(
-					'label'       => __( 'Container Width', 'bensemangat' ),
-					'description' => __( 'Choose between Bootstrap\'s container and container-fluid', 'bensemangat' ),
+					'label'       => __('Container Width', 'bensemangat'),
+					'description' => __('Choose between Bootstrap\'s container and container-fluid', 'bensemangat'),
 					'section'     => 'bensemangat_theme_layout_options',
 					'settings'    => 'bensemangat_container_type',
 					'type'        => 'select',
 					'choices'     => array(
-						'container'       => __( 'Fixed width container', 'bensemangat' ),
-						'container-fluid' => __( 'Full width container', 'bensemangat' ),
+						'container'       => __('Fixed width container', 'bensemangat'),
+						'container-fluid' => __('Full width container', 'bensemangat'),
 					),
-					'priority'    => apply_filters( 'bensemangat_container_type_priority', 10 ),
+					'priority'    => apply_filters('bensemangat_container_type_priority', 10),
 				)
 			)
 		);
@@ -110,7 +113,7 @@ if ( ! function_exists( 'bensemangat_theme_customize_register' ) ) {
 				$wp_customize,
 				'bensemangat_sidebar_position',
 				array(
-					'label'             => __( 'Sidebar Positioning', 'bensemangat' ),
+					'label'             => __('Sidebar Positioning', 'bensemangat'),
 					'description'       => __(
 						'Set sidebar\'s default position. Can either be: right, left, both or none. Note: this can be overridden on individual pages.',
 						'bensemangat'
@@ -120,41 +123,184 @@ if ( ! function_exists( 'bensemangat_theme_customize_register' ) ) {
 					'type'              => 'select',
 					'sanitize_callback' => 'bensemangat_theme_slug_sanitize_select',
 					'choices'           => array(
-						'right' => __( 'Right sidebar', 'bensemangat' ),
-						'left'  => __( 'Left sidebar', 'bensemangat' ),
-						'both'  => __( 'Left & Right sidebars', 'bensemangat' ),
-						'none'  => __( 'No sidebar', 'bensemangat' ),
+						'right' => __('Right sidebar', 'bensemangat'),
+						'left'  => __('Left sidebar', 'bensemangat'),
+						'both'  => __('Left & Right sidebars', 'bensemangat'),
+						'none'  => __('No sidebar', 'bensemangat'),
 					),
-					'priority'          => apply_filters( 'bensemangat_sidebar_position_priority', 20 ),
+					'priority'          => apply_filters('bensemangat_sidebar_position_priority', 20),
 				)
 			)
 		);
 	}
 } // End of if function_exists( 'bensemangat_theme_customize_register' ).
-add_action( 'customize_register', 'bensemangat_theme_customize_register' );
+add_action('customize_register', 'bensemangat_theme_customize_register');
 
 // Custom
-if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
+if (!function_exists('bensemangat_site_customize_register')) {
 	/**
 	 * Register individual settings through customizer's API.
 	 *
 	 * @param WP_Customize_Manager $wp_customize Customizer reference.
 	 */
-	function bensemangat_site_customize_register( $wp_customize ) {
+	function bensemangat_site_customize_register($wp_customize)
+	{
 
 		// Theme layout settings.
 		$wp_customize->add_section(
-			'bensemangat_site_info_options',
+			'bensemangat_social_media_options',
 			array(
-				'title'       => __( 'Site Info Settings', 'bensemangat' ),
+				'title'       => __('Social Media', 'bensemangat'),
 				'capability'  => 'edit_theme_options',
-				'description' => __( 'Info about this site', 'bensemangat' ),
-				'priority'    => apply_filters( 'bensemangat_site_info_options_priority', 160 ),
+				'description' => __('Your social media link', 'bensemangat'),
+				'priority'    => apply_filters('bensemangat_social_media_options_priority', 160),
 			)
 		);
 
 		$wp_customize->add_setting(
+			'bensemangat_social_media_facebook',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_social_media_instagram',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_social_media_youtube',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_social_media_linkedin',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_social_media_facebook',
+				array(
+					'label'             => __('Facebook', 'bensemangat'),
+					'description'       => __(
+						'Please enter your Facebook to display in the navigation menu.'
+					),
+					'section'           => 'bensemangat_social_media_options',
+					'settings'          => 'bensemangat_social_media_facebook',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_social_media_facebook_priority', 20),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_social_media_instagram',
+				array(
+					'label'             => __('Instagram', 'bensemangat'),
+					'description'       => __(
+						'Please enter your Instagram to display in the navigation menu.'
+					),
+					'section'           => 'bensemangat_social_media_options',
+					'settings'          => 'bensemangat_social_media_instagram',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_social_media_instagram_priority', 20),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_social_media_youtube',
+				array(
+					'label'             => __('Youtube', 'bensemangat'),
+					'description'       => __(
+						'Please enter your Youtube to display in the navigation menu.'
+					),
+					'section'           => 'bensemangat_social_media_options',
+					'settings'          => 'bensemangat_social_media_youtube',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_social_media_youtube_priority', 20),
+				)
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_social_media_linkedin',
+				array(
+					'label'             => __('Linkedin', 'bensemangat'),
+					'description'       => __(
+						'Please enter your Linkedin to display in the navigation menu.'
+					),
+					'section'           => 'bensemangat_social_media_options',
+					'settings'          => 'bensemangat_social_media_linkedin',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_social_media_linkedin_priority', 20),
+				)
+			)
+		);
+
+
+		// Site Info
+		$wp_customize->add_section(
+			'bensemangat_site_info_options',
+			array(
+				'title'       => __('Site Info Settings', 'bensemangat'),
+				'capability'  => 'edit_theme_options',
+				'description' => __('Info about this site', 'bensemangat'),
+				'priority'    => apply_filters('bensemangat_site_info_options_priority', 160),
+			)
+		);
+
+		$wp_customize->add_setting(
+			'bensemangat_site_info_email',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
 			'bensemangat_site_info_phone',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_site_info_fax',
+			array(
+				'default'           => '',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_setting(
+			'bensemangat_site_info_mobilephone',
 			array(
 				'default'           => '',
 				'type'              => 'theme_mod',
@@ -184,16 +330,64 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 		$wp_customize->add_control(
 			new WP_Customize_Control(
 				$wp_customize,
+				'bensemangat_site_info_email',
+				array(
+					'label'             => __('Email', 'bensemangat'),
+					'description'       => __(
+						'Please enter your Email to display in the top bar of the navigation menu.'
+					),
+					'section'           => 'bensemangat_site_info_options',
+					'settings'          => 'bensemangat_site_info_email',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_site_info_email_priority', 20),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
 				'bensemangat_site_info_phone',
 				array(
-					'label'             => __( 'Phone Number', 'bensemangat' ),
+					'label'             => __('Phone Number', 'bensemangat'),
 					'description'       => __(
 						'Please enter your phone number to display in the top bar of the navigation menu.'
 					),
 					'section'           => 'bensemangat_site_info_options',
 					'settings'          => 'bensemangat_site_info_phone',
 					'type'              => 'text',
-					'priority'          => apply_filters( 'bensemangat_site_info_phone_priority', 20 ),
+					'priority'          => apply_filters('bensemangat_site_info_phone_priority', 20),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_site_info_fax',
+				array(
+					'label'             => __('Fax Number', 'bensemangat'),
+					'description'       => __(
+						'Please enter your phone number to display in the top bar of the navigation menu.'
+					),
+					'section'           => 'bensemangat_site_info_options',
+					'settings'          => 'bensemangat_site_info_fax',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_site_info_fax_priority', 20),
+				)
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'bensemangat_site_info_mobilephone',
+				array(
+					'label'             => __('Mobile Number', 'bensemangat'),
+					'description'       => __(
+						'Please enter your mobile number to display in the top bar of the navigation menu.'
+					),
+					'section'           => 'bensemangat_site_info_options',
+					'settings'          => 'bensemangat_site_info_mobilephone',
+					'type'              => 'text',
+					'priority'          => apply_filters('bensemangat_site_info_mobilephone_priority', 20),
 				)
 			)
 		);
@@ -202,14 +396,14 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 				$wp_customize,
 				'bensemangat_site_info_address',
 				array(
-					'label'             => __( 'Your Address', 'bensemangat' ),
+					'label'             => __('Your Address', 'bensemangat'),
 					'description'       => __(
 						'Please enter your address to display in the top bar of the navigation menu.'
 					),
 					'section'           => 'bensemangat_site_info_options',
 					'settings'          => 'bensemangat_site_info_address',
 					'type'              => 'textarea',
-					'priority'          => apply_filters( 'bensemangat_site_info_address_priority', 20 ),
+					'priority'          => apply_filters('bensemangat_site_info_address_priority', 20),
 				)
 			)
 		);
@@ -218,36 +412,37 @@ if ( ! function_exists( 'bensemangat_site_customize_register' ) ) {
 				$wp_customize,
 				'bensemangat_site_info_text',
 				array(
-					'label'             => __( 'Text Info', 'bensemangat' ),
+					'label'             => __('Text Info', 'bensemangat'),
 					'description'       => __(
 						'Please enter text whatever to display in the top bar of the navigation menu.'
 					),
 					'section'           => 'bensemangat_site_info_options',
 					'settings'          => 'bensemangat_site_info_text',
 					'type'              => 'textarea',
-					'priority'          => apply_filters( 'bensemangat_site_info_text_priority', 20 ),
+					'priority'          => apply_filters('bensemangat_site_info_text_priority', 20),
 				)
 			)
 		);
 	}
 } // End of if function_exists( 'bensemangat_site_customize_register' ).
-add_action( 'customize_register', 'bensemangat_site_customize_register' );
+add_action('customize_register', 'bensemangat_site_customize_register');
 
-if( ! function_exists( 'bensemangat_general_customize_register' ) ) {
-	function bensemangat_general_customize_register( $wp_customize ) {
+if (!function_exists('bensemangat_general_customize_register')) {
+	function bensemangat_general_customize_register($wp_customize)
+	{
 
 		//radio box sanitization function
-		function theme_slug_sanitize_radio( $input, $setting ){
-		
+		function theme_slug_sanitize_radio($input, $setting)
+		{
+
 			//input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
 			$input = sanitize_key($input);
-	
+
 			//get the list of possible radio box options 
-			$choices = $setting->manager->get_control( $setting->id )->choices;
-								
+			$choices = $setting->manager->get_control($setting->id)->choices;
+
 			//return input if valid or return default option
-			return ( array_key_exists( $input, $choices ) ? $input : $setting->default );                
-				
+			return (array_key_exists($input, $choices) ? $input : $setting->default);
 		}
 
 		$wp_customize->add_section(
@@ -256,7 +451,7 @@ if( ! function_exists( 'bensemangat_general_customize_register' ) ) {
 				'title'			=> __('General Settings', 'bensemangat'),
 				'capability'	=> 'edit_theme_options',
 				'description'	=> __('All general setting options for this theme.', 'bensemangat'),
-				'priority'		=> apply_filters( 'bensemangat_general_options_priority', 160 ),
+				'priority'		=> apply_filters('bensemangat_general_options_priority', 160),
 			)
 		);
 
@@ -278,36 +473,37 @@ if( ! function_exists( 'bensemangat_general_customize_register' ) ) {
 					'description'		=> __('Enable or Disable Preloader before website fully loaded.'),
 					'section'			=> 'bensemangat_general_options',
 					'settings'			=> 'bensemangat_preloader',
-					'priority'			=> apply_filters( 'bensemangat_preloader', 20 ),
+					'priority'			=> apply_filters('bensemangat_preloader', 20),
 					'type' => 'radio',
 					'choices' => array(
-						'on' => esc_html__('Enable Preloader','bensemangat'),
-						'off' => esc_html__('Disable Preloader','bensemangat'),
+						'on' => esc_html__('Enable Preloader', 'bensemangat'),
+						'off' => esc_html__('Disable Preloader', 'bensemangat'),
 					)
 				)
 			)
 		);
 	}
 }
-add_action( 'customize_register', 'bensemangat_general_customize_register');
+add_action('customize_register', 'bensemangat_general_customize_register');
 
 // End Custom
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-if ( ! function_exists( 'bensemangat_customize_preview_js' ) ) {
+if (!function_exists('bensemangat_customize_preview_js')) {
 	/**
 	 * Setup JS integration for live previewing.
 	 */
-	function bensemangat_customize_preview_js() {
+	function bensemangat_customize_preview_js()
+	{
 		wp_enqueue_script(
 			'bensemangat_customizer',
 			get_template_directory_uri() . '/js/customizer.js',
-			array( 'customize-preview' ),
+			array('customize-preview'),
 			'20130508',
 			true
 		);
 	}
 }
-add_action( 'customize_preview_init', 'bensemangat_customize_preview_js' );
+add_action('customize_preview_init', 'bensemangat_customize_preview_js');
