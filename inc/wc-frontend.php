@@ -54,10 +54,13 @@ function woo_cart_but_count( $fragments ) {
 /**
 * Add a custom link to the end of a specific menu that uses the wp_nav_menu() function
 */
+if ( class_exists( 'WooCommerce' ) ) {
+
 add_filter('wp_nav_menu_items', 'woo_cart_but_icon', 10, 2);
-function woo_cart_but_icon($items, $args){
-    if( $args->theme_location == 'secondary' ){
-        $items .=  do_shortcode('[woo_cart_but]');
-    }
-    return $items;
+	function woo_cart_but_icon($items, $args){
+		if( $args->theme_location == 'secondary' ){
+			$items .=  do_shortcode('[woo_cart_but]');
+		}
+		return $items;
+	}
 }
